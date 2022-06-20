@@ -1,0 +1,7 @@
+strings:
+  inputs: TextEditorSampler/TextEditor/Resources/ja.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift5
+      output: TextEditorSampler/TextEditor/Resources/Strings.swift
+      params:
+        publicAccess: true

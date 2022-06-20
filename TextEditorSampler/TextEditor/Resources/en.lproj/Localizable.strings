@@ -1,0 +1,11 @@
+/*
+  Localizable.strings
+  TextEditorSampler
+
+  Created by Ueoka Kazuya on 2022/06/20.
+*/
+
+"pick_image" = "Pick image";
+"edit" = "Edit";
+"delete" = "Delete";
+"cover_image" = "Cover image";
