@@ -8,6 +8,8 @@
 import Combine
 import UIKit
 
+/// テキストエディタのタイトルを入力する
+@MainActor
 public final class TextEditorTitleView: UIView, UITextViewDelegate {
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,7 +21,7 @@ public final class TextEditorTitleView: UIView, UITextViewDelegate {
         setUp()
     }
 
-    override public func prepareForInterfaceBuilder() {
+    @MainActor override public func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         setUp()
     }
@@ -31,6 +33,7 @@ public final class TextEditorTitleView: UIView, UITextViewDelegate {
         return {}
     }()
 
+    /// タイトルを入力
     public lazy var textView: PlaceholderTextView = {
         let textView = PlaceholderTextView(frame: bounds)
         textView.placeholderText = L10n.title

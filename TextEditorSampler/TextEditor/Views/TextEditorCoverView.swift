@@ -11,11 +11,21 @@ import UIKit
 
 /// @mockable
 public protocol TextEditorCoverViewDelegate: AnyObject {
+    /// 画像選択ボタンをタップした際に呼ばれる
+    /// - Parameter coverView: TextEditorCoverView
     func coverViewDidTapPickImage(_ coverView: TextEditorCoverView)
+
+    /// 画像編集ボタンをタップした際に呼ばれる
+    /// - Parameter coverView: TextEditorCoverView
     func coverViewDidTapEdit(_ coverView: TextEditorCoverView)
+
+    /// 画像削除ボタンをタップした際に呼ばれる
+    /// - Parameter coverView: TextEditorCoverView
     func coverViewDidTapDelete(_ coverView: TextEditorCoverView)
 }
 
+/// テキストエディタのカバー画像を設定する画面
+/// 画像の選択、編集、削除ができます
 @MainActor
 public final class TextEditorCoverView: UIView {
     public weak var delegate: TextEditorCoverViewDelegate?
@@ -44,6 +54,7 @@ public final class TextEditorCoverView: UIView {
         return {}
     }()
 
+    /// 選択した画像を表示する
     public lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: bounds)
         imageView.backgroundColor = TextEditorConstant.Color.background
@@ -67,6 +78,7 @@ public final class TextEditorCoverView: UIView {
         ])
     }
 
+    /// 画像を選択するボタン
     public lazy var pickButton: UIButton = {
         let button = UIButton(type: .custom)
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 48))
@@ -96,6 +108,7 @@ public final class TextEditorCoverView: UIView {
         ])
     }
 
+    /// 既に画像を選択済みの場合に表示する編集ボタン
     public lazy var editButton: UIButton = {
         let button = UIButton(type: .custom)
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 48))
@@ -125,6 +138,7 @@ public final class TextEditorCoverView: UIView {
         ])
     }
 
+    /// 既に画像を選択済みの場合に表示する削除ボタン
     public lazy var deleteButton: UIButton = {
         let button = UIButton(type: .custom)
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 48))

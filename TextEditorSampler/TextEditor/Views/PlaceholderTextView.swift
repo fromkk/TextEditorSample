@@ -9,6 +9,8 @@ import Combine
 import SwiftUI
 import UIKit
 
+/// placeholderの表示をサポートしたtextView
+@MainActor
 open class PlaceholderTextView: UITextView {
     override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -20,7 +22,7 @@ open class PlaceholderTextView: UITextView {
         setUp()
     }
 
-    override open func prepareForInterfaceBuilder() {
+    @MainActor override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         setUp()
     }
@@ -38,9 +40,13 @@ open class PlaceholderTextView: UITextView {
         }
     }
 
+    /// placeholderのテキスト
     @Published public var placeholderText: String?
+
+    /// placeholderの文字色
     @Published public var placeholderTextColor: UIColor = TextEditorConstant.Color.placeholderText
 
+    /// placeholderを表示するラベル
     public lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.text = placeholderText
