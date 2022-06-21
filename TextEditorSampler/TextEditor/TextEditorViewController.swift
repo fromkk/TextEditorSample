@@ -13,6 +13,7 @@ public protocol TextEditorViewControllerDelegate: AnyObject {
     func textEditorPickCoverImage(_ textEditor: TextEditorViewController) async throws -> UIImage?
 }
 
+/// note のテキストエディタ
 @MainActor
 open class TextEditorViewController: UIViewController {
     public weak var delegate: TextEditorViewControllerDelegate?
@@ -34,6 +35,7 @@ open class TextEditorViewController: UIViewController {
         }
     }
 
+    /// 閉じるボタン
     public lazy var closeBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(title: L10n.close, style: .plain, target: self, action: #selector(close(sender:)))
         item.accessibilityIdentifier = #function
@@ -44,6 +46,7 @@ open class TextEditorViewController: UIViewController {
         dismiss(animated: true)
     }
 
+    /// スクロールビュー
     public lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: view.bounds)
         scrollView.accessibilityIdentifier = #function
@@ -61,6 +64,7 @@ open class TextEditorViewController: UIViewController {
         ])
     }
 
+    /// コンテンツを全て内包するstackView
     public lazy var stackView: UIStackView = {
         let stackView = UIStackView(frame: view.bounds)
         stackView.distribution = .fill
@@ -85,6 +89,7 @@ open class TextEditorViewController: UIViewController {
         ])
     }
 
+    /// カバー画像を設定する
     public lazy var coverView: TextEditorCoverView = {
         let coverView = TextEditorCoverView()
         coverView.delegate = self
@@ -101,6 +106,7 @@ open class TextEditorViewController: UIViewController {
         coverViewNoImageHeightConstraint.isActive = true
     }
 
+    /// タイトルを入力
     public lazy var titleView: TextEditorTitleView = {
         let titleView = TextEditorTitleView()
         titleView.accessibilityIdentifier = #function

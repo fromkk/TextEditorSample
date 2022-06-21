@@ -8,11 +8,11 @@
 @testable import TextEditor
 import XCTest
 
-final class TextEditorCoverViewTest: XCTestCase {
+@MainActor final class TextEditorCoverViewTest: XCTestCase {
     var coverView: TextEditorCoverView!
     var delegate: TextEditorCoverViewDelegateMock!
 
-    override func setUp() {
+    @MainActor override func setUp() {
         super.setUp()
         delegate = .init()
         coverView = .init()
