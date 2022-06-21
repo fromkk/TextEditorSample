@@ -19,11 +19,12 @@ open class TextEditorViewController: UIViewController {
 
     override open func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = TextEditorConstant.Color.background
         navigationItem.leftBarButtonItem = closeBarButtonItem
         addScrollView()
         addStackView()
         addCoverView()
+        addTitleView()
         subscribe()
     }
 
@@ -100,6 +101,16 @@ open class TextEditorViewController: UIViewController {
         coverViewNoImageHeightConstraint.isActive = true
     }
 
+    public lazy var titleView: TextEditorTitleView = {
+        let titleView = TextEditorTitleView()
+        titleView.accessibilityIdentifier = #function
+        return titleView
+    }()
+
+    private func addTitleView() {
+        stackView.addArrangedSubview(titleView)
+    }
+
     // MARK: - Combine
 
     private var cancellables: Set<AnyCancellable> = .init()
@@ -114,7 +125,7 @@ open class TextEditorViewController: UIViewController {
             .sink { [weak self] hasImage in
                 self?.coverViewHasImageHeightConstraint.isActive = hasImage
                 self?.coverViewNoImageHeightConstraint.isActive = !hasImage
-                self?.invalidateIntrinsicContentSizeSubViews()
+                self?.coverView.invalidateIntrinsicContentSize()
             }
             .store(in: &cancellables)
     }

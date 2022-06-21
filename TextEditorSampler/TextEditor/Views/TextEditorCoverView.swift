@@ -46,7 +46,7 @@ public final class TextEditorCoverView: UIView {
 
     public lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: bounds)
-        imageView.backgroundColor = .systemGray6
+        imageView.backgroundColor = TextEditorConstant.Color.background
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.accessibilityLabel = L10n.coverImage

@@ -20,6 +20,8 @@ public enum L10n {
     public static let edit = L10n.tr("Localizable", "edit")
     /// 画像を選択
     public static let pickImage = L10n.tr("Localizable", "pick_image")
+    /// タイトル
+    public static let title = L10n.tr("Localizable", "title")
 }
 
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
