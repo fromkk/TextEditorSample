@@ -10,6 +10,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum L10n {
+    /// 閉じる
+    public static let close = L10n.tr("Localizable", "close")
     /// カバー画像
     public static let coverImage = L10n.tr("Localizable", "cover_image")
     /// 削除

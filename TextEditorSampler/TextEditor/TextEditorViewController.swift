@@ -5,13 +5,42 @@
 //  Created by Ueoka Kazuya on 2022/06/20.
 //
 
+import Combine
+import SwiftUI
 import UIKit
 
+public protocol TextEditorViewControllerDelegate: AnyObject {
+    func textEditorPickCoverImage(_ textEditor: TextEditorViewController) async throws -> UIImage?
+}
+
+@MainActor
 open class TextEditorViewController: UIViewController {
+    public weak var delegate: TextEditorViewControllerDelegate?
+
     override open func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        navigationItem.leftBarButtonItem = closeBarButtonItem
         addScrollView()
         addStackView()
+        addCoverView()
+        subscribe()
+    }
+
+    private func invalidateIntrinsicContentSizeSubViews() {
+        stackView.arrangedSubviews.forEach {
+            $0.invalidateIntrinsicContentSize()
+        }
+    }
+
+    public lazy var closeBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(title: L10n.close, style: .plain, target: self, action: #selector(close(sender:)))
+        item.accessibilityIdentifier = #function
+        return item
+    }()
+
+    @objc private func close(sender _: UIBarButtonItem) {
+        dismiss(animated: true)
     }
 
     public lazy var scrollView: UIScrollView = {
@@ -53,5 +82,64 @@ open class TextEditorViewController: UIViewController {
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
         ])
+    }
+
+    public lazy var coverView: TextEditorCoverView = {
+        let coverView = TextEditorCoverView()
+        coverView.delegate = self
+        coverView.accessibilityIdentifier = #function
+        return coverView
+    }()
+
+    private lazy var coverViewHasImageHeightConstraint = coverView.heightAnchor.constraint(equalTo: coverView.widthAnchor, multiplier: 196 / 375)
+    private lazy var coverViewNoImageHeightConstraint = coverView.heightAnchor.constraint(equalTo: coverView.widthAnchor, multiplier: 80 / 375)
+
+    private func addCoverView() {
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(coverView)
+        coverViewNoImageHeightConstraint.isActive = true
+    }
+
+    // MARK: - Combine
+
+    private var cancellables: Set<AnyCancellable> = .init()
+
+    private func subscribe() {
+        handleCoverViewHeightConstraint()
+    }
+
+    private func handleCoverViewHeightConstraint() {
+        coverView.$image
+            .map { $0 != nil }
+            .sink { [weak self] hasImage in
+                self?.coverViewHasImageHeightConstraint.isActive = hasImage
+                self?.coverViewNoImageHeightConstraint.isActive = !hasImage
+                self?.invalidateIntrinsicContentSizeSubViews()
+            }
+            .store(in: &cancellables)
+    }
+}
+
+extension TextEditorViewController: TextEditorCoverViewDelegate {
+    public func coverViewDidTapPickImage(_: TextEditorCoverView) {
+        pickCoverImage()
+    }
+
+    public func coverViewDidTapEdit(_: TextEditorCoverView) {
+        pickCoverImage()
+    }
+
+    private func pickCoverImage() {
+        Task {
+            do {
+                coverView.image = try await self.delegate?.textEditorPickCoverImage(self)
+            } catch {
+                print("error \(error.localizedDescription)")
+            }
+        }
+    }
+
+    public func coverViewDidTapDelete(_ coverView: TextEditorCoverView) {
+        coverView.image = nil
     }
 }

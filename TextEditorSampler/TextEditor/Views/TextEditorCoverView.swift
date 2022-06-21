@@ -16,6 +16,7 @@ public protocol TextEditorCoverViewDelegate: AnyObject {
     func coverViewDidTapDelete(_ coverView: TextEditorCoverView)
 }
 
+@MainActor
 public final class TextEditorCoverView: UIView {
     public weak var delegate: TextEditorCoverViewDelegate?
 
@@ -29,7 +30,7 @@ public final class TextEditorCoverView: UIView {
         setUp()
     }
 
-    override public func prepareForInterfaceBuilder() {
+    @MainActor override public func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         setUp()
     }
@@ -49,6 +50,8 @@ public final class TextEditorCoverView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.accessibilityLabel = L10n.coverImage
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         imageView.accessibilityIdentifier = #function
         return imageView
     }()
@@ -85,8 +88,9 @@ public final class TextEditorCoverView: UIView {
         addSubview(pickButton)
         NSLayoutConstraint.activate([
             pickButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            pickButton.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            bottomAnchor.constraint(equalTo: pickButton.bottomAnchor, constant: 16),
+            pickButton.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 16),
+            bottomAnchor.constraint(greaterThanOrEqualTo: pickButton.bottomAnchor, constant: 16),
+            pickButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             pickButton.widthAnchor.constraint(equalToConstant: 48),
             pickButton.heightAnchor.constraint(equalTo: pickButton.widthAnchor)
         ])
@@ -113,8 +117,9 @@ public final class TextEditorCoverView: UIView {
         addSubview(editButton)
         NSLayoutConstraint.activate([
             deleteButton.leadingAnchor.constraint(equalTo: editButton.trailingAnchor, constant: 8),
-            editButton.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            bottomAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 16),
+            editButton.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 16),
+            bottomAnchor.constraint(greaterThanOrEqualTo: editButton.bottomAnchor, constant: 16),
+            editButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             editButton.widthAnchor.constraint(equalToConstant: 48),
             editButton.heightAnchor.constraint(equalTo: editButton.widthAnchor)
         ])
@@ -141,8 +146,9 @@ public final class TextEditorCoverView: UIView {
         addSubview(deleteButton)
         NSLayoutConstraint.activate([
             trailingAnchor.constraint(equalTo: deleteButton.trailingAnchor, constant: 16),
-            deleteButton.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            bottomAnchor.constraint(equalTo: deleteButton.bottomAnchor, constant: 16),
+            deleteButton.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 16),
+            bottomAnchor.constraint(greaterThanOrEqualTo: deleteButton.bottomAnchor, constant: 16),
+            deleteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             deleteButton.widthAnchor.constraint(equalToConstant: 48),
             deleteButton.heightAnchor.constraint(equalTo: deleteButton.widthAnchor)
         ])

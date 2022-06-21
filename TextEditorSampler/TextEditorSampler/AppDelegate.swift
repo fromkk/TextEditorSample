@@ -6,12 +6,17 @@
 //
 
 import UIKit
+#if DEBUG
+    import Gedatsu
+#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        true
+        #if DEBUG
+            Gedatsu.open()
+        #endif
+        return true
     }
 
     // MARK: UISceneSession Lifecycle
