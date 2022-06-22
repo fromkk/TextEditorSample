@@ -21,4 +21,6 @@ public enum TextEditorConstant {
         public static var body: UIFont = .preferredFont(forTextStyle: .body)
         public static var caption: UIFont = .preferredFont(forTextStyle: .callout)
     }
+
+    public static var minimumItemHeight: CGFloat = 32
 }

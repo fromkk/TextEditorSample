@@ -48,7 +48,7 @@ public final class TextEditorTitleView: UIView, UITextViewDelegate {
         return textView
     }()
 
-    private lazy var textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: 32)
+    private lazy var textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: TextEditorConstant.minimumItemHeight)
 
     private func addTextView() {
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +84,7 @@ public final class TextEditorTitleView: UIView, UITextViewDelegate {
 
     private func subscribe() {
         textView.publisher(for: \.contentSize)
-            .map { max($0.height, 32) }
+            .map { max($0.height, TextEditorConstant.minimumItemHeight) }
             .removeDuplicates()
             .sink { [weak self] height in
                 self?.textViewHeightConstraint.constant = height

@@ -26,6 +26,8 @@ open class TextEditorViewController: UIViewController {
         addStackView()
         addCoverView()
         addTitleView()
+        let defaultInputView = makeDefaultItemView()
+        stackView.addArrangedSubview(defaultInputView)
         subscribe()
     }
 
@@ -115,6 +117,11 @@ open class TextEditorViewController: UIViewController {
 
     private func addTitleView() {
         stackView.addArrangedSubview(titleView)
+    }
+
+    private func makeDefaultItemView() -> TextEditorItemView {
+        let itemView = TextEditorItemView()
+        return itemView
     }
 
     // MARK: - Combine
