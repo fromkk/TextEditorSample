@@ -121,6 +121,8 @@ open class TextEditorViewController: UIViewController {
 
     private func makeDefaultItemView() -> TextEditorItemView {
         let itemView = TextEditorItemView()
+        let item = TextEditorTextItem(delegate: self)
+        itemView.item = item
         return itemView
     }
 
@@ -165,5 +167,44 @@ extension TextEditorViewController: TextEditorCoverViewDelegate {
 
     public func coverViewDidTapDelete(_ coverView: TextEditorCoverView) {
         coverView.image = nil
+    }
+}
+
+extension TextEditorViewController: TextEditorTextViewDelegate {
+    public func textViewAdd(_: TextEditorTextView) {
+        let nextItemView = makeDefaultItemView()
+        if let index = stackView.arrangedSubviews.firstIndex(where: { itemView in
+            guard let itemView = itemView as? TextEditorItemView else { return false }
+            return itemView.contentView?.isEqual(itemView) ?? false
+        }) {
+            stackView.insertArrangedSubview(nextItemView, at: index + 1)
+        } else {
+            stackView.addArrangedSubview(nextItemView)
+        }
+        (nextItemView.contentView as? TextEditorTextView)?.becomeFirstResponder()
+    }
+
+    public func textView(_: TextEditorTextView, separateAt _: NSRange) {
+        print("\(#function)")
+    }
+
+    public func textViewDeleteIfNeeded(_ textView: TextEditorTextView) {
+        guard let index = stackView.arrangedSubviews.firstIndex(where: { itemView in
+            guard let itemView = itemView as? TextEditorItemView else { return false }
+            return itemView.contentView?.isEqual(textView) ?? false
+        }) else {
+            return
+        }
+        let itemView = stackView.arrangedSubviews[index]
+        stackView.removeArrangedSubview(itemView)
+        itemView.removeFromSuperview()
+
+        guard
+            let previousItemView = stackView.arrangedSubviews[index - 1] as? TextEditorItemView,
+            let textView = previousItemView.contentView as? TextEditorTextView
+        else {
+            return
+        }
+        textView.becomeFirstResponder()
     }
 }

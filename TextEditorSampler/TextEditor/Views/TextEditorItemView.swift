@@ -30,7 +30,7 @@ import UIKit
         return {}
     }()
 
-    public var item: TextEditorItemRepresentable = TextEditorTextItem() {
+    public var item: TextEditorItemRepresentable? {
         didSet {
             replaceContentView()
         }
@@ -47,6 +47,8 @@ import UIKit
 
     private func replaceContentView() {
         resetContentView()
+        guard let item = item else { return }
+        contentView = item.contentView
         addContentView(item.contentView)
         subscribeContentSize()
     }
@@ -74,6 +76,7 @@ import UIKit
     private var cancellables: Set<AnyCancellable> = .init()
 
     private func subscribeContentSize() {
+        guard let item = item else { return }
         item.contentSizeDidChangePublisher
             .removeDuplicates()
             .sink { [weak self] size in
