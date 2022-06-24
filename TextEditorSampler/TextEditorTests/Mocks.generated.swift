@@ -10,6 +10,47 @@ import UIKit
 @testable import TextEditor
 
 
+public class TextEditorTextViewDelegateMock: TextEditorTextViewDelegate {
+    public init() { }
+
+
+    public private(set) var textViewAddCallCount = 0
+    public var textViewAddArgValues = [TextEditorTextView]()
+    public var textViewAddHandler: ((TextEditorTextView) -> ())?
+    public func textViewAdd(_ textView: TextEditorTextView)  {
+        textViewAddCallCount += 1
+        textViewAddArgValues.append(textView)
+        if let textViewAddHandler = textViewAddHandler {
+            textViewAddHandler(textView)
+        }
+        
+    }
+
+    public private(set) var textViewDeleteIfNeededCallCount = 0
+    public var textViewDeleteIfNeededArgValues = [TextEditorTextView]()
+    public var textViewDeleteIfNeededHandler: ((TextEditorTextView) -> ())?
+    public func textViewDeleteIfNeeded(_ textView: TextEditorTextView)  {
+        textViewDeleteIfNeededCallCount += 1
+        textViewDeleteIfNeededArgValues.append(textView)
+        if let textViewDeleteIfNeededHandler = textViewDeleteIfNeededHandler {
+            textViewDeleteIfNeededHandler(textView)
+        }
+        
+    }
+
+    public private(set) var textViewCallCount = 0
+    public var textViewArgValues = [(TextEditorTextView, NSRange)]()
+    public var textViewHandler: ((TextEditorTextView, NSRange) -> ())?
+    public func textView(_ textView: TextEditorTextView, separateAt range: NSRange)  {
+        textViewCallCount += 1
+        textViewArgValues.append((textView, range))
+        if let textViewHandler = textViewHandler {
+            textViewHandler(textView, range)
+        }
+        
+    }
+}
+
 public class TextEditorCoverViewDelegateMock: TextEditorCoverViewDelegate {
     public init() { }
 

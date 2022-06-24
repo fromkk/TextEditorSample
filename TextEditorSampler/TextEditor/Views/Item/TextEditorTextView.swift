@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// @mockable
 public protocol TextEditorTextViewDelegate: AnyObject {
     func textViewAdd(_ textView: TextEditorTextView)
     func textViewDeleteIfNeeded(_ textView: TextEditorTextView)
