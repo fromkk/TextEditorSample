@@ -184,8 +184,27 @@ extension TextEditorViewController: TextEditorTextViewDelegate {
         (nextItemView.contentView as? TextEditorTextView)?.becomeFirstResponder()
     }
 
-    public func textView(_: TextEditorTextView, separateAt _: NSRange) {
-        print("\(#function)")
+    public func textView(_ textView: TextEditorTextView, separateAt range: NSRange) {
+        let location = range.location + range.length
+        let length = textView.attributedText.length - location
+        let cutRange = NSRange(location: location, length: length)
+        let attributedString = NSMutableAttributedString(attributedString: textView.attributedText)
+        let cutText = attributedString.attributedSubstring(from: cutRange)
+        attributedString.replaceCharacters(in: cutRange, with: "")
+        textView.attributedText = attributedString
+        textView.removeLastNewLine()
+
+        let afterItemView = makeDefaultItemView()
+        (afterItemView.contentView as? TextEditorTextView)?.attributedText = cutText
+
+        if let index = stackView.arrangedSubviews.firstIndex(where: {
+            guard let itemView = $0 as? TextEditorItemView else { return false }
+            return itemView.contentView?.isEqual(textView) ?? false
+        }) {
+            stackView.insertArrangedSubview(afterItemView, at: index + 1)
+        }
+        (afterItemView.contentView as? TextEditorTextView)?.becomeFirstResponder()
+        (afterItemView.contentView as? TextEditorTextView)?.selectedRange = NSRange(location: 0, length: 0)
     }
 
     public func textViewDeleteIfNeeded(_ textView: TextEditorTextView) {
