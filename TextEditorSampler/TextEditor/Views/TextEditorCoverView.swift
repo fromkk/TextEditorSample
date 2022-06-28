@@ -60,6 +60,7 @@ public final class TextEditorCoverView: UIView {
         imageView.backgroundColor = TextEditorConstant.Color.background
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.tintColor = TextEditorConstant.Color.placeholderText
         imageView.accessibilityLabel = L10n.coverImage
         imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
@@ -82,9 +83,14 @@ public final class TextEditorCoverView: UIView {
     public lazy var pickButton: UIButton = {
         let button = UIButton(type: .custom)
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 48))
-        let image = UIImage(systemName: "photo.circle.fill", withConfiguration: configuration)
+        let image: UIImage?
+        if #available(iOS 15.0, *) {
+            image = UIImage(systemName: "photo.circle.fill", withConfiguration: configuration)
+        } else {
+            image = UIImage(systemName: "photo.fill", withConfiguration: configuration)
+        }
         button.setImage(image, for: .normal)
-        button.tintColor = .systemGray3
+        button.tintColor = TextEditorConstant.Color.placeholderText
         button.imageView?.contentMode = .scaleAspectFit
         button.addAction(.init { [weak self] _ in
             guard let self = self else { return }
@@ -114,7 +120,7 @@ public final class TextEditorCoverView: UIView {
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 48))
         let image = UIImage(systemName: "pencil.circle.fill", withConfiguration: configuration)
         button.setImage(image, for: .normal)
-        button.tintColor = .systemGray3
+        button.tintColor = TextEditorConstant.Color.placeholderText
         button.imageView?.contentMode = .scaleAspectFit
         button.addAction(.init { [weak self] _ in
             guard let self = self else { return }
