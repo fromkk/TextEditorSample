@@ -22,6 +22,15 @@ public enum L10n {
     public static let pickImage = L10n.tr("Localizable", "pick_image")
     /// タイトル
     public static let title = L10n.tr("Localizable", "title")
+
+    public enum TextEditor {
+        public enum Body {
+            /// ご自由にお書きください。
+            public static let placeholder0 = L10n.tr("Localizable", "text_editor.body.placeholder_0")
+            /// 読んだ本の感想を書いてみませんか？
+            public static let placeholder1 = L10n.tr("Localizable", "text_editor.body.placeholder_1")
+        }
+    }
 }
 
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

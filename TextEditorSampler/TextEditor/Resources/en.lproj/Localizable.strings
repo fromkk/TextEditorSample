@@ -11,3 +11,5 @@
 "cover_image" = "Cover image";
 "close" = "Close";
 "title" = "Title";
+"text_editor.body.placeholder_0" = "Share your story.";
+"text_editor.body.placeholder_1" = "Hello!";

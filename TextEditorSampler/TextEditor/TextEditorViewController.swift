@@ -67,8 +67,9 @@ open class TextEditorViewController: UIViewController {
     }
 
     /// コンテンツを全て内包するstackView
-    public lazy var stackView: UIStackView = {
-        let stackView = UIStackView(frame: view.bounds)
+    public lazy var stackView: TextEditorStackView = {
+        let stackView = TextEditorStackView(frame: view.bounds)
+        stackView.delegate = self
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 8
@@ -125,6 +126,11 @@ open class TextEditorViewController: UIViewController {
         itemView.item = item
         return itemView
     }
+
+    fileprivate let textViewPlaceholder: String? = [
+        L10n.TextEditor.Body.placeholder0,
+        L10n.TextEditor.Body.placeholder1
+    ].randomElement()
 
     // MARK: - Combine
 
@@ -225,5 +231,33 @@ extension TextEditorViewController: TextEditorTextViewDelegate {
             return
         }
         textView.becomeFirstResponder()
+    }
+}
+
+extension TextEditorViewController: TextEditorStackViewDelegate {
+    public func stackViewDidAdd(_: TextEditorStackView, arrangedSubview _: UIView) {
+        updatePlaceholderForFirstTextView()
+    }
+
+    public func stackViewDidInsert(_: TextEditorStackView, arrangedSubview _: UIView, at _: Int) {
+        updatePlaceholderForFirstTextView()
+    }
+
+    public func stackViewDidRemove(_: TextEditorStackView, arrangedSubview _: UIView) {
+        updatePlaceholderForFirstTextView()
+    }
+
+    private func updatePlaceholderForFirstTextView() {
+        stackView.arrangedSubviews
+            .compactMap { $0 as? TextEditorItemView }
+            .enumerated()
+            .forEach { offset, element in
+                guard let textView = element.contentView as? TextEditorTextView else { return }
+                if offset == 0 {
+                    textView.placeholderText = textViewPlaceholder
+                } else {
+                    textView.placeholderText = nil
+                }
+            }
     }
 }
