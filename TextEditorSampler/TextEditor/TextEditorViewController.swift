@@ -23,6 +23,7 @@ open class TextEditorViewController: UIViewController {
         view.backgroundColor = TextEditorConstant.Color.background
         navigationItem.leftBarButtonItem = closeBarButtonItem
         addScrollView()
+        addToolbar()
         addStackView()
         addCoverView()
         addTitleView()
@@ -61,8 +62,7 @@ open class TextEditorViewController: UIViewController {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
     }
 
@@ -132,12 +132,42 @@ open class TextEditorViewController: UIViewController {
         L10n.TextEditor.Body.placeholder1
     ].randomElement()
 
+    public lazy var toolbar: TextEditorToolbar = {
+        let toolbar = TextEditorToolbar()
+        toolbar.closeKeyboardButton.addAction(.init { [weak self] _ in
+            self?.view.endEditing(true)
+        }, for: .primaryActionTriggered)
+        toolbar.accessibilityIdentifier = #function
+        return toolbar
+    }()
+
+    private func addToolbar() {
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(toolbar)
+        NSLayoutConstraint.activate([
+            toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: toolbar.trailingAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: 50),
+            toolbar.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            toolbarBottomConstraint
+        ])
+    }
+
+    private lazy var toolbarBottomConstraint: NSLayoutConstraint = {
+        if #available(iOS 15.0, *) {
+            return view.keyboardLayoutGuide.topAnchor.constraint(equalTo: toolbar.bottomAnchor)
+        } else {
+            return view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: toolbar.bottomAnchor)
+        }
+    }()
+
     // MARK: - Combine
 
     private var cancellables: Set<AnyCancellable> = .init()
 
     private func subscribe() {
         handleCoverViewHeightConstraint()
+        handleToolbarBottomConstraint()
     }
 
     private func handleCoverViewHeightConstraint() {
@@ -147,6 +177,30 @@ open class TextEditorViewController: UIViewController {
                 self?.coverViewHasImageHeightConstraint.isActive = hasImage
                 self?.coverViewNoImageHeightConstraint.isActive = !hasImage
                 self?.coverView.invalidateIntrinsicContentSize()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func handleToolbarBottomConstraint() {
+        if #available(iOS 15.0, *) { return }
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+            .compactMap(\.keyboard)
+            .sink { [weak self] keyboard in
+                guard let self = self else { return }
+                self.toolbarBottomConstraint.constant = keyboard.frame.height - self.view.safeAreaInsets.bottom
+                UIView.animate(withDuration: keyboard.animationDuration, delay: 0, options: keyboard.animationCurve) { [weak self] in
+                    self?.view.layoutIfNeeded()
+                }
+            }
+            .store(in: &cancellables)
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .compactMap(\.keyboard)
+            .sink { [weak self] keyboard in
+                guard let self = self else { return }
+                self.toolbarBottomConstraint.constant = 0
+                UIView.animate(withDuration: keyboard.animationDuration, delay: 0, options: keyboard.animationCurve) { [weak self] in
+                    self?.view.layoutIfNeeded()
+                }
             }
             .store(in: &cancellables)
     }
