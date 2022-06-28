@@ -12,6 +12,8 @@ import Foundation
 public enum L10n {
     /// 閉じる
     public static let close = L10n.tr("Localizable", "close")
+    /// キーボードを閉じる
+    public static let closeKeyboard = L10n.tr("Localizable", "close_keyboard")
     /// カバー画像
     public static let coverImage = L10n.tr("Localizable", "cover_image")
     /// 削除

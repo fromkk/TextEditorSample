@@ -31,12 +31,8 @@ public final class TextEditorToolbar: UIView {
         return {}
     }()
 
-    public lazy var closeKeyboardButton: UIButton = {
-        let button = UIButton(type: .custom)
-        let configuration = UIImage.SymbolConfiguration(font: TextEditorConstant.Font.body)
-        let image = UIImage(systemName: "keyboard.chevron.compact.down", withConfiguration: configuration)
-        button.setImage(image, for: .normal)
-        button.tintColor = TextEditorConstant.Color.normalText
+    lazy var closeKeyboardButton: CloseKeyboardItem = {
+        let button = CloseKeyboardItem(type: .custom)
         button.accessibilityIdentifier = #function
         return button
     }()
