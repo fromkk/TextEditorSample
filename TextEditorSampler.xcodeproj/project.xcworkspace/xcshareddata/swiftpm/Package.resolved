@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "gedatsu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bannzai/Gedatsu.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "76ea433c0c3e84b06aadb44badd45c69d53549fa"
+      }
+    }
+  ],
+  "version" : 2
+}
