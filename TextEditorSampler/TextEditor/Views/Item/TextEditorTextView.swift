@@ -49,4 +49,8 @@ public protocol TextEditorTextViewDelegate: AnyObject {
             return checker(textView, shouldChangeTextIn: range, replacementText: text)
         }
     }
+
+    public func textViewDidChangeSelection(_ textView: UITextView) {
+        NotificationCenter.default.post(name: .textViewDidChangeSelection, object: textView)
+    }
 }

@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-final class CloseKeyboardItem: UIButton {
+final class CloseKeyboardItem: KeyboardItem {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()

@@ -24,6 +24,7 @@ open class TextEditorViewController: UIViewController {
         navigationItem.leftBarButtonItem = closeBarButtonItem
         addScrollView()
         addToolbar()
+        setEditorToolbarItems()
         addStackView()
         addCoverView()
         addTitleView()
@@ -160,6 +161,18 @@ open class TextEditorViewController: UIViewController {
             return view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: toolbar.bottomAnchor)
         }
     }()
+
+    public lazy var editorToolbarItems: [KeyboardItem] = [
+        BoldKeyboardItem(type: .custom)
+    ] {
+        didSet {
+            setEditorToolbarItems()
+        }
+    }
+
+    private func setEditorToolbarItems() {
+        toolbar.items = editorToolbarItems
+    }
 
     // MARK: - Combine
 

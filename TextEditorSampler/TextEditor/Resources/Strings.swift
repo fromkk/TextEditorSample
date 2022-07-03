@@ -10,6 +10,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum L10n {
+    /// 太字
+    public static let bold = L10n.tr("Localizable", "bold")
     /// 閉じる
     public static let close = L10n.tr("Localizable", "close")
     /// キーボードを閉じる

@@ -27,6 +27,7 @@ public final class TextEditorToolbar: UIView {
         backgroundColor = TextEditorConstant.Color.background
         addCloseKeyboardButton()
         addScrollView()
+        addStackView()
         addTopSeparatorView()
         return {}
     }()
@@ -62,6 +63,43 @@ public final class TextEditorToolbar: UIView {
             bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             closeKeyboardButton.leadingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 8)
         ])
+    }
+
+    public lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        return stackView
+    }()
+
+    private func addStackView() {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.frameLayoutGuide.topAnchor),
+            scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
+        ])
+    }
+
+    private var itemsConstraints: [NSLayoutConstraint] = []
+
+    public var items: [KeyboardItem] = [] {
+        didSet {
+            itemsConstraints.forEach { $0.isActive = false }
+            itemsConstraints = []
+            items.forEach {
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                stackView.addArrangedSubview($0)
+                itemsConstraints.append(contentsOf: [
+                    $0.widthAnchor.constraint(equalTo: $0.heightAnchor)
+                ])
+            }
+            NSLayoutConstraint.activate(itemsConstraints)
+        }
     }
 
     private lazy var topSeparatorView: UIView = {

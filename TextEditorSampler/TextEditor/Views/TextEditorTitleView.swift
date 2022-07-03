@@ -78,6 +78,10 @@ public final class TextEditorTitleView: UIView, UITextViewDelegate {
         textView.text = (textView.text as NSString).replacingOccurrences(of: "\n|\r|\t", with: "", options: .regularExpression, range: range)
     }
 
+    public func textViewDidChangeSelection(_ textView: UITextView) {
+        NotificationCenter.default.post(name: .textViewDidChangeSelection, object: textView)
+    }
+
     // MARK: - Combine
 
     private var cancellables: Set<AnyCancellable> = .init()
