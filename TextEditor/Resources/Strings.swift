@@ -22,6 +22,8 @@ public enum L10n {
     public static let delete = L10n.tr("Localizable", "delete")
     /// 編集
     public static let edit = L10n.tr("Localizable", "edit")
+    /// フォーマット
+    public static let format = L10n.tr("Localizable", "format")
     /// 画像を選択
     public static let pickImage = L10n.tr("Localizable", "pick_image")
     /// タイトル

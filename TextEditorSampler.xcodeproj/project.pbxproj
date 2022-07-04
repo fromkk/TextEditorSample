@@ -17,6 +17,9 @@
 		4F19F825286AE580005FCCB5 /* NotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F19F824286AE580005FCCB5 /* NotificationName+.swift */; };
 		4F19F827286AE72F005FCCB5 /* BoldKeyboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F19F826286AE72F005FCCB5 /* BoldKeyboardItem.swift */; };
 		4F277FED286C3B0100B625AF /* KeyboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F277FEC286C3B0100B625AF /* KeyboardItem.swift */; };
+		4F855B2E2872876500474CE7 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F855B2D2872876500474CE7 /* UIFont+.swift */; };
+		4F855B312872913000474CE7 /* TextEditorMenuBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F855B302872913000474CE7 /* TextEditorMenuBuilder.swift */; };
+		4F855B342872DB2F00474CE7 /* DebugPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F855B332872DB2F00474CE7 /* DebugPrinter.swift */; };
 		4FA04DB0286181B400BF09AC /* Gedatsu in Frameworks */ = {isa = PBXBuildFile; productRef = 4FA04DAF286181B400BF09AC /* Gedatsu */; };
 		4FA04DB32861834900BF09AC /* NSLayoutConstraint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA04DB22861834900BF09AC /* NSLayoutConstraint+.swift */; };
 		4FA04DB52861999800BF09AC /* TextEditorTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA04DB42861999800BF09AC /* TextEditorTitleView.swift */; };
@@ -116,6 +119,9 @@
 		4F19F824286AE580005FCCB5 /* NotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+.swift"; sourceTree = "<group>"; };
 		4F19F826286AE72F005FCCB5 /* BoldKeyboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoldKeyboardItem.swift; sourceTree = "<group>"; };
 		4F277FEC286C3B0100B625AF /* KeyboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardItem.swift; sourceTree = "<group>"; };
+		4F855B2D2872876500474CE7 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		4F855B302872913000474CE7 /* TextEditorMenuBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorMenuBuilder.swift; sourceTree = "<group>"; };
+		4F855B332872DB2F00474CE7 /* DebugPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPrinter.swift; sourceTree = "<group>"; };
 		4FA04DB22861834900BF09AC /* NSLayoutConstraint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+.swift"; sourceTree = "<group>"; };
 		4FA04DB42861999800BF09AC /* TextEditorTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorTitleView.swift; sourceTree = "<group>"; };
 		4FA04DB628619EF100BF09AC /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
@@ -216,6 +222,22 @@
 			path = Items;
 			sourceTree = "<group>";
 		};
+		4F855B2F287290BA00474CE7 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4F855B302872913000474CE7 /* TextEditorMenuBuilder.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		4F855B322872DB2200474CE7 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				4F855B332872DB2F00474CE7 /* DebugPrinter.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		4FA04DB12861833900BF09AC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +246,7 @@
 				4FC213EA28645E4000792DD8 /* Collection+.swift */,
 				4F19F81F286AD709005FCCB5 /* Notification+Keyboard.swift */,
 				4F19F824286AE580005FCCB5 /* NotificationName+.swift */,
+				4F855B2D2872876500474CE7 /* UIFont+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -320,6 +343,8 @@
 		4FD48F53286042DE00868A3B /* TextEditor */ = {
 			isa = PBXGroup;
 			children = (
+				4F855B322872DB2200474CE7 /* Helper */,
+				4F855B2F287290BA00474CE7 /* Menu */,
 				4FD847562862DDE200B6FE9C /* Converter */,
 				4FA04DBB2861B60C00BF09AC /* Item */,
 				4FA04DB82861A01E00BF09AC /* Constant */,
@@ -711,13 +736,16 @@
 				4FA04DB52861999800BF09AC /* TextEditorTitleView.swift in Sources */,
 				4FD847582862DE5C00B6FE9C /* DoubleNewLineConverter.swift in Sources */,
 				4F19F827286AE72F005FCCB5 /* BoldKeyboardItem.swift in Sources */,
+				4F855B312872913000474CE7 /* TextEditorMenuBuilder.swift in Sources */,
 				4FA04DC22861B8BA00BF09AC /* TextEditorTextView.swift in Sources */,
 				4FA04DB32861834900BF09AC /* NSLayoutConstraint+.swift in Sources */,
+				4F855B342872DB2F00474CE7 /* DebugPrinter.swift in Sources */,
 				4F10ED822862F5490093A413 /* TextEditorConverter.swift in Sources */,
 				4FD48F71286042EE00868A3B /* TextEditorViewController.swift in Sources */,
 				4F19F823286ADF7A005FCCB5 /* CloseKeyboardItem.swift in Sources */,
 				4FA04DBD2861B62000BF09AC /* TextEditorItemRepresentable.swift in Sources */,
 				4F277FED286C3B0100B625AF /* KeyboardItem.swift in Sources */,
+				4F855B2E2872876500474CE7 /* UIFont+.swift in Sources */,
 				4F19F820286AD709005FCCB5 /* Notification+Keyboard.swift in Sources */,
 				4F10ED86286306630093A413 /* UITextView+.swift in Sources */,
 				4FD48F7E28605E0600868A3B /* Strings.swift in Sources */,

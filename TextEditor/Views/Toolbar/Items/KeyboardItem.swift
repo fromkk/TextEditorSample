@@ -33,15 +33,22 @@ open class KeyboardItem: UIButton {
     private var cancellables: Set<AnyCancellable> = .init()
 
     private lazy var setUp: () -> Void = {
-        publisher(for: \.isEnabled)
-            .sink { [weak self] isEnabled in
-                if isEnabled {
-                    self?.tintColor = TextEditorConstant.Color.normalText
+        Publishers.CombineLatest(
+            publisher(for: \.isEnabled),
+            publisher(for: \.isSelected)
+        )
+        .sink { [weak self] isEnabled, isSelected in
+            if isEnabled {
+                if isSelected {
+                    self?.tintColor = TextEditorConstant.Color.point
                 } else {
-                    self?.tintColor = TextEditorConstant.Color.disabled
+                    self?.tintColor = TextEditorConstant.Color.normalText
                 }
+            } else {
+                self?.tintColor = TextEditorConstant.Color.disabled
             }
-            .store(in: &cancellables)
+        }
+        .store(in: &cancellables)
         return {}
     }()
 }
