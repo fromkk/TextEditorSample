@@ -74,7 +74,6 @@ public final class BoldKeyboardItem: KeyboardItem {
     }
 
     @objc override public func toggleBoldface(_: Any?) {
-        print("\(String(describing: type(of: self))).\(#function)")
         guard let textView = delegate?.currentTextView else { return }
         let selectedRange = textView.selectedRange
         let attributedString = NSMutableAttributedString(attributedString: textView.attributedText)
