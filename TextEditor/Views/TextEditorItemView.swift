@@ -78,9 +78,10 @@ import UIKit
     private func subscribeContentSize() {
         guard let item = item else { return }
         item.contentSizeDidChangePublisher
+            .map { max(TextEditorConstant.minimumItemHeight, $0.height) }
             .removeDuplicates()
-            .sink { [weak self] size in
-                self?.contentViewHeightConstraint?.constant = size.height
+            .sink { [weak self] height in
+                self?.contentViewHeightConstraint?.constant = height
                 self?.invalidateIntrinsicContentSize()
             }
             .store(in: &cancellables)
