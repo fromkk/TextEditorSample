@@ -244,11 +244,11 @@ extension TextEditorViewController: TextEditorCoverViewDelegate {
 }
 
 extension TextEditorViewController: TextEditorTextViewDelegate {
-    public func textViewAdd(_: TextEditorTextView) {
+    public func textViewAdd(_ textView: TextEditorTextView) {
         let nextItemView = makeDefaultItemView()
         if let index = stackView.arrangedSubviews.firstIndex(where: { itemView in
             guard let itemView = itemView as? TextEditorItemView else { return false }
-            return itemView.contentView?.isEqual(itemView) ?? false
+            return itemView.contentView?.isEqual(textView) ?? false
         }) {
             stackView.insertArrangedSubview(nextItemView, at: index + 1)
         } else {

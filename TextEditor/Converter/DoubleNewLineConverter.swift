@@ -20,20 +20,23 @@ public final class DoubleNewLineConverter: TextEditorConverter {
         } else {
             isNewLine = false
         }
-        defer {
-            isLastNewLine = isNewLine
-        }
 
-        if isLastNewLine, isNewLine {
-            if (textView.text as NSString).length == range.location {
-                textViewDelegate?.textViewAdd(textView)
+        if isNewLine {
+            if isLastNewLine {
+                if (textView.text as NSString).length == range.location {
+                    textViewDelegate?.textViewAdd(textView)
+                } else {
+                    textViewDelegate?.textView(textView, separateAt: range)
+                }
+                textView.removeLastNewLine()
+                isLastNewLine = false
+                return false
             } else {
-                textViewDelegate?.textView(textView, separateAt: range)
+                isLastNewLine = true
+                return true
             }
-            textView.removeLastNewLine()
-            isLastNewLine = false
-            return false
         } else {
+            isLastNewLine = false
             return true
         }
     }

@@ -51,6 +51,7 @@
 		4FD48F802860728000868A3B /* TextEditorCoverViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD48F7F2860728000868A3B /* TextEditorCoverViewTest.swift */; };
 		4FD48F84286075E400868A3B /* Mocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD48F83286075E400868A3B /* Mocks.generated.swift */; };
 		4FD847582862DE5C00B6FE9C /* DoubleNewLineConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD847572862DE5C00B6FE9C /* DoubleNewLineConverter.swift */; };
+		ADA331FD28791FF40011C614 /* DoubleNewLineConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +154,7 @@
 		4FD48F7F2860728000868A3B /* TextEditorCoverViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorCoverViewTest.swift; sourceTree = "<group>"; };
 		4FD48F83286075E400868A3B /* Mocks.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mocks.generated.swift; sourceTree = "<group>"; };
 		4FD847572862DE5C00B6FE9C /* DoubleNewLineConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleNewLineConverter.swift; sourceTree = "<group>"; };
+		ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleNewLineConverterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,6 +338,7 @@
 		4FD48F61286042DE00868A3B /* TextEditorTests */ = {
 			isa = PBXGroup;
 			children = (
+				ADA331FB28791EBE0011C614 /* Converter */,
 				4FC213EC28645EA800792DD8 /* Extensions */,
 				4FD48F85286075F500868A3B /* Views */,
 				4FD48F83286075E400868A3B /* Mocks.generated.swift */,
@@ -381,6 +384,14 @@
 				4F10ED812862F5490093A413 /* TextEditorConverter.swift */,
 				4FD847572862DE5C00B6FE9C /* DoubleNewLineConverter.swift */,
 				4F10ED832862F9BA0093A413 /* RemoveTextConverter.swift */,
+			);
+			path = Converter;
+			sourceTree = "<group>";
+		};
+		ADA331FB28791EBE0011C614 /* Converter */ = {
+			isa = PBXGroup;
+			children = (
+				ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */,
 			);
 			path = Converter;
 			sourceTree = "<group>";
@@ -736,6 +747,7 @@
 				4FC213F2286461C200792DD8 /* NSLayoutConstraintTest.swift in Sources */,
 				4FC213EE28645EB700792DD8 /* CollectionTest.swift in Sources */,
 				4FC213F02864606A00792DD8 /* UITextViewTest.swift in Sources */,
+				ADA331FD28791FF40011C614 /* DoubleNewLineConverterTest.swift in Sources */,
 				4FD48F802860728000868A3B /* TextEditorCoverViewTest.swift in Sources */,
 				4FD48F84286075E400868A3B /* Mocks.generated.swift in Sources */,
 			);
