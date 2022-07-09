@@ -31,6 +31,7 @@ public final class DoubleNewLineConverter: TextEditorConverter {
                 textViewDelegate?.textView(textView, separateAt: range)
             }
             textView.removeLastNewLine()
+            isLastNewLine = false
             return false
         } else {
             return true

@@ -287,10 +287,6 @@ extension TextEditorViewController: TextEditorTextViewDelegate {
         }) else {
             return
         }
-        let itemView = stackView.arrangedSubviews[index]
-        stackView.removeArrangedSubview(itemView)
-        itemView.removeFromSuperview()
-
         guard
             let previousItemView = stackView.arrangedSubviews[index - 1] as? TextEditorItemView,
             let textView = previousItemView.contentView as? TextEditorTextView
@@ -298,6 +294,10 @@ extension TextEditorViewController: TextEditorTextViewDelegate {
             return
         }
         textView.becomeFirstResponder()
+
+        let itemView = stackView.arrangedSubviews[index]
+        stackView.removeArrangedSubview(itemView)
+        itemView.removeFromSuperview()
     }
 }
 
