@@ -22,6 +22,8 @@ open class TextEditorViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = TextEditorConstant.Color.background
         navigationItem.leftBarButtonItem = closeBarButtonItem
+        viewRespectsSystemMinimumLayoutMargins = false
+        view.layoutMargins = .zero
         addScrollView()
         addToolbar()
         setEditorToolbarItems()
@@ -79,15 +81,12 @@ open class TextEditorViewController: UIViewController {
         return stackView
     }()
 
-    private lazy var stackViewLeadingConstraint: NSLayoutConstraint = stackView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor)
-    private lazy var stackViewTrailingConstraint: NSLayoutConstraint = scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
-
     private func addStackView() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
         NSLayoutConstraint.activate([
-            stackViewLeadingConstraint,
-            stackViewTrailingConstraint,
+            stackView.leadingAnchor.constraint(equalTo: view.readableContentGuide.leadingAnchor),
+            view.readableContentGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
         ])
