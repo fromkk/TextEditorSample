@@ -37,6 +37,7 @@ public protocol TextEditorValueRepresentable {}
 
     public var contentView: UIView = {
         let textView = TextEditorTextView()
+        textView.font = TextEditorConstant.Font.body
         return textView
     }()
 
