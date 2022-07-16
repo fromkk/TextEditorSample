@@ -311,11 +311,36 @@ extension TextEditorViewController: TextEditorTextViewDelegate {
         }
         guard
             let previousItemView = stackView.arrangedSubviews[index - 1] as? TextEditorItemView,
-            let textView = previousItemView.contentView as? TextEditorTextView
+            let previousTextView = previousItemView.contentView as? TextEditorTextView
         else {
             return
         }
-        textView.becomeFirstResponder()
+        previousTextView.becomeFirstResponder()
+
+        let itemView = stackView.arrangedSubviews[index]
+        stackView.removeArrangedSubview(itemView)
+        itemView.removeFromSuperview()
+    }
+
+    public func textViewJoinIfNeeded(_ textView: TextEditorTextView) {
+        guard let index = stackView.arrangedSubviews.firstIndex(where: { itemView in
+            guard let itemView = itemView as? TextEditorItemView else { return false }
+            return itemView.contentView?.isEqual(textView) ?? false
+        }) else {
+            return
+        }
+        guard
+            let previousItemView = stackView.arrangedSubviews[index - 1] as? TextEditorItemView,
+            let previousTextView = previousItemView.contentView as? TextEditorTextView
+        else {
+            return
+        }
+        let location = previousTextView.attributedText.length
+        let attributedString = NSMutableAttributedString(attributedString: previousTextView.attributedText)
+        attributedString.append(textView.attributedText)
+        previousTextView.attributedText = attributedString
+        previousTextView.becomeFirstResponder()
+        previousTextView.selectedRange = NSRange(location: location, length: 0)
 
         let itemView = stackView.arrangedSubviews[index]
         stackView.removeArrangedSubview(itemView)
