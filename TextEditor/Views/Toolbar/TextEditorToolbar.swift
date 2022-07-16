@@ -8,6 +8,8 @@
 import UIKit
 
 public final class TextEditorToolbar: UIView {
+    public weak var keyboardItemDelegate: KeyboardItemDelegate?
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -92,6 +94,7 @@ public final class TextEditorToolbar: UIView {
             itemsConstraints.forEach { $0.isActive = false }
             itemsConstraints = []
             items.forEach {
+                $0.delegate = keyboardItemDelegate
                 $0.translatesAutoresizingMaskIntoConstraints = false
                 stackView.addArrangedSubview($0)
                 itemsConstraints.append(contentsOf: [
@@ -118,5 +121,29 @@ public final class TextEditorToolbar: UIView {
             topSeparatorView.topAnchor.constraint(equalTo: topAnchor),
             topSeparatorView.heightAnchor.constraint(equalToConstant: 1 / traitCollection.displayScale)
         ])
+    }
+
+    override public var keyCommands: [UIKeyCommand]? {
+        if #available(iOS 15.0, *) {
+            return super.keyCommands
+        } else {
+            var result = super.keyCommands ?? []
+            result = items.reduce(into: result) { partialResult, item in
+                partialResult.append(contentsOf: item.keyCommands ?? [])
+            }
+            return result
+        }
+    }
+
+    override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if !items.filter({ $0.canPerformAction(action, withSender: sender) }).isEmpty {
+            return true
+        } else {
+            return super.canPerformAction(action, withSender: sender)
+        }
+    }
+
+    override public func target(forAction action: Selector, withSender sender: Any?) -> Any? {
+        items.compactMap { $0.target(forAction: action, withSender: sender) }.first
     }
 }

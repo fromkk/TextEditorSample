@@ -14,6 +14,7 @@ public enum TextEditorConstant {
         public static var placeholderText: UIColor = .systemGray3
         public static var separator: UIColor = .systemGray4
         public static var disabled: UIColor = .systemGray5
+        public static var point: UIColor = .systemGreen
     }
 
     public enum Font {

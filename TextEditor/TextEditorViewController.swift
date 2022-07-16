@@ -134,6 +134,7 @@ open class TextEditorViewController: UIViewController {
 
     public lazy var toolbar: TextEditorToolbar = {
         let toolbar = TextEditorToolbar()
+        toolbar.keyboardItemDelegate = self
         toolbar.closeKeyboardButton.addAction(.init { [weak self] _ in
             self?.view.endEditing(true)
         }, for: .primaryActionTriggered)
@@ -171,6 +172,28 @@ open class TextEditorViewController: UIViewController {
 
     private func setEditorToolbarItems() {
         toolbar.items = editorToolbarItems
+    }
+
+    override open var keyCommands: [UIKeyCommand]? {
+        if #available(iOS 15.0, *) {
+            return super.keyCommands
+        } else {
+            var result = super.keyCommands ?? []
+            result.append(contentsOf: toolbar.keyCommands ?? [])
+            return result
+        }
+    }
+
+    override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if toolbar.canPerformAction(action, withSender: sender) {
+            return true
+        } else {
+            return super.canPerformAction(action, withSender: sender)
+        }
+    }
+
+    override open func target(forAction action: Selector, withSender sender: Any?) -> Any? {
+        toolbar.target(forAction: action, withSender: sender)
     }
 
     // MARK: - Combine
@@ -325,5 +348,13 @@ extension TextEditorViewController: TextEditorStackViewDelegate {
                     textView.placeholderText = nil
                 }
             }
+    }
+}
+
+extension TextEditorViewController: KeyboardItemDelegate {
+    public var currentTextView: UITextView? {
+        stackView.arrangedSubviews
+            .compactMap { ($0 as? TextEditorItemView)?.contentView as? UITextView }
+            .first(where: { $0.isFirstResponder })
     }
 }
