@@ -44,10 +44,10 @@ public protocol TextEditorTextViewDelegate: AnyObject {
     ]
 
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        textConverters.allSatisfy { checker in
+        textConverters.allSatisfy { converter in
             guard let textView = textView as? TextEditorTextView else { return false }
-            checker.textViewDelegate = textViewDelegate
-            return checker(textView, shouldChangeTextIn: range, replacementText: text)
+            converter.textViewDelegate = textViewDelegate
+            return converter(textView, shouldChangeTextIn: range, replacementText: text)
         }
     }
 
