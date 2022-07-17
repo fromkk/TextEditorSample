@@ -63,6 +63,7 @@
 		ADB7F4E22882E41A00D7C2DA /* TextEditorSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4E12882E41A00D7C2DA /* TextEditorSheetCell.swift */; };
 		ADB7F5B72882E92300D7C2DA /* TextEditorSheetImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F5B62882E92300D7C2DA /* TextEditorSheetImageItem.swift */; };
 		ADB7F5B92883DA0E00D7C2DA /* TextEditorItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F5B82883DA0E00D7C2DA /* TextEditorItemImageView.swift */; };
+		ADB7F5BB2883F61000D7C2DA /* TextEditorViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F5BA2883F61000D7C2DA /* TextEditorViewController+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +178,7 @@
 		ADB7F4E12882E41A00D7C2DA /* TextEditorSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorSheetCell.swift; sourceTree = "<group>"; };
 		ADB7F5B62882E92300D7C2DA /* TextEditorSheetImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorSheetImageItem.swift; sourceTree = "<group>"; };
 		ADB7F5B82883DA0E00D7C2DA /* TextEditorItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorItemImageView.swift; sourceTree = "<group>"; };
+		ADB7F5BA2883F61000D7C2DA /* TextEditorViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditorViewController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,6 +379,7 @@
 				4FD48F54286042DE00868A3B /* TextEditor.h */,
 				4FD48F55286042DE00868A3B /* TextEditor.docc */,
 				4FD48F70286042EE00868A3B /* TextEditorViewController.swift */,
+				ADB7F5BA2883F61000D7C2DA /* TextEditorViewController+.swift */,
 			);
 			path = TextEditor;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				ADB7F4E02882CBE300D7C2DA /* TextEditorSheetItem.swift in Sources */,
 				ADB7F5B72882E92300D7C2DA /* TextEditorSheetImageItem.swift in Sources */,
 				4FD847582862DE5C00B6FE9C /* DoubleNewLineConverter.swift in Sources */,
+				ADB7F5BB2883F61000D7C2DA /* TextEditorViewController+.swift in Sources */,
 				4F19F827286AE72F005FCCB5 /* BoldKeyboardItem.swift in Sources */,
 				4F855B312872913000474CE7 /* TextEditorMenuBuilder.swift in Sources */,
 				4FA04DC22861B8BA00BF09AC /* TextEditorTextView.swift in Sources */,
