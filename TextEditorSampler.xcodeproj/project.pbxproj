@@ -55,6 +55,14 @@
 		4FD48F84286075E400868A3B /* Mocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD48F83286075E400868A3B /* Mocks.generated.swift */; };
 		4FD847582862DE5C00B6FE9C /* DoubleNewLineConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD847572862DE5C00B6FE9C /* DoubleNewLineConverter.swift */; };
 		ADA331FD28791FF40011C614 /* DoubleNewLineConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */; };
+		ADB7F4D72882A8A900D7C2DA /* TextEditorTextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4D62882A8A900D7C2DA /* TextEditorTextItem.swift */; };
+		ADB7F4D92882A92300D7C2DA /* TextEditorImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4D82882A92300D7C2DA /* TextEditorImageItem.swift */; };
+		ADB7F4DB2882C84700D7C2DA /* PlusToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4DA2882C84700D7C2DA /* PlusToolbarItem.swift */; };
+		ADB7F4DE2882CB4F00D7C2DA /* TextEditorSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4DD2882CB4F00D7C2DA /* TextEditorSheetViewController.swift */; };
+		ADB7F4E02882CBE300D7C2DA /* TextEditorSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4DF2882CBE300D7C2DA /* TextEditorSheetItem.swift */; };
+		ADB7F4E22882E41A00D7C2DA /* TextEditorSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4E12882E41A00D7C2DA /* TextEditorSheetCell.swift */; };
+		ADB7F5B72882E92300D7C2DA /* TextEditorSheetImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F5B62882E92300D7C2DA /* TextEditorSheetImageItem.swift */; };
+		ADB7F5B92883DA0E00D7C2DA /* TextEditorItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F5B82883DA0E00D7C2DA /* TextEditorItemImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +169,14 @@
 		4FD48F83286075E400868A3B /* Mocks.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mocks.generated.swift; sourceTree = "<group>"; };
 		4FD847572862DE5C00B6FE9C /* DoubleNewLineConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleNewLineConverter.swift; sourceTree = "<group>"; };
 		ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleNewLineConverterTest.swift; sourceTree = "<group>"; };
+		ADB7F4D62882A8A900D7C2DA /* TextEditorTextItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorTextItem.swift; sourceTree = "<group>"; };
+		ADB7F4D82882A92300D7C2DA /* TextEditorImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorImageItem.swift; sourceTree = "<group>"; };
+		ADB7F4DA2882C84700D7C2DA /* PlusToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusToolbarItem.swift; sourceTree = "<group>"; };
+		ADB7F4DD2882CB4F00D7C2DA /* TextEditorSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorSheetViewController.swift; sourceTree = "<group>"; };
+		ADB7F4DF2882CBE300D7C2DA /* TextEditorSheetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorSheetItem.swift; sourceTree = "<group>"; };
+		ADB7F4E12882E41A00D7C2DA /* TextEditorSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorSheetCell.swift; sourceTree = "<group>"; };
+		ADB7F5B62882E92300D7C2DA /* TextEditorSheetImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorSheetImageItem.swift; sourceTree = "<group>"; };
+		ADB7F5B82883DA0E00D7C2DA /* TextEditorItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorItemImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +236,7 @@
 				4F19F822286ADF7A005FCCB5 /* CloseKeyboardItem.swift */,
 				4F19F826286AE72F005FCCB5 /* BoldKeyboardItem.swift */,
 				4F277FEC286C3B0100B625AF /* KeyboardItem.swift */,
+				ADB7F4DA2882C84700D7C2DA /* PlusToolbarItem.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -265,6 +282,9 @@
 			isa = PBXGroup;
 			children = (
 				4FA04DBC2861B62000BF09AC /* TextEditorItemRepresentable.swift */,
+				ADB7F4D62882A8A900D7C2DA /* TextEditorTextItem.swift */,
+				ADB7F4D82882A92300D7C2DA /* TextEditorImageItem.swift */,
+				ADB7F5B82883DA0E00D7C2DA /* TextEditorItemImageView.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -345,6 +365,7 @@
 		4FD48F53286042DE00868A3B /* TextEditor */ = {
 			isa = PBXGroup;
 			children = (
+				ADB7F4DC2882CB3E00D7C2DA /* Sheet */,
 				4F855B322872DB2200474CE7 /* Helper */,
 				4F855B2F287290BA00474CE7 /* Menu */,
 				4FD847562862DDE200B6FE9C /* Converter */,
@@ -419,6 +440,25 @@
 				ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */,
 			);
 			path = Converter;
+			sourceTree = "<group>";
+		};
+		ADB7F4DC2882CB3E00D7C2DA /* Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				ADB7F5B52882E91500D7C2DA /* Items */,
+				ADB7F4DD2882CB4F00D7C2DA /* TextEditorSheetViewController.swift */,
+				ADB7F4E12882E41A00D7C2DA /* TextEditorSheetCell.swift */,
+			);
+			path = Sheet;
+			sourceTree = "<group>";
+		};
+		ADB7F5B52882E91500D7C2DA /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				ADB7F4DF2882CBE300D7C2DA /* TextEditorSheetItem.swift */,
+				ADB7F5B62882E92300D7C2DA /* TextEditorSheetImageItem.swift */,
+			);
+			path = Items;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -741,10 +781,15 @@
 				4F10ED842862F9BA0093A413 /* RemoveTextConverter.swift in Sources */,
 				4FD48F742860564C00868A3B /* TextEditorCoverView.swift in Sources */,
 				4FA04DBA2861A02C00BF09AC /* TextEditorConstant.swift in Sources */,
+				ADB7F4D72882A8A900D7C2DA /* TextEditorTextItem.swift in Sources */,
 				4FC213EB28645E4000792DD8 /* Collection+.swift in Sources */,
 				4F19F81A286A9873005FCCB5 /* TextEditorStackView.swift in Sources */,
+				ADB7F4D92882A92300D7C2DA /* TextEditorImageItem.swift in Sources */,
+				ADB7F5B92883DA0E00D7C2DA /* TextEditorItemImageView.swift in Sources */,
 				4F19F81D286AA31C005FCCB5 /* TextEditorToolbar.swift in Sources */,
 				4FA04DB52861999800BF09AC /* TextEditorTitleView.swift in Sources */,
+				ADB7F4E02882CBE300D7C2DA /* TextEditorSheetItem.swift in Sources */,
+				ADB7F5B72882E92300D7C2DA /* TextEditorSheetImageItem.swift in Sources */,
 				4FD847582862DE5C00B6FE9C /* DoubleNewLineConverter.swift in Sources */,
 				4F19F827286AE72F005FCCB5 /* BoldKeyboardItem.swift in Sources */,
 				4F855B312872913000474CE7 /* TextEditorMenuBuilder.swift in Sources */,
@@ -757,10 +802,13 @@
 				4FA04DBD2861B62000BF09AC /* TextEditorItemRepresentable.swift in Sources */,
 				4F277FED286C3B0100B625AF /* KeyboardItem.swift in Sources */,
 				4F855B2E2872876500474CE7 /* UIFont+.swift in Sources */,
+				ADB7F4DB2882C84700D7C2DA /* PlusToolbarItem.swift in Sources */,
 				4F19F820286AD709005FCCB5 /* Notification+Keyboard.swift in Sources */,
 				4F10ED86286306630093A413 /* UITextView+.swift in Sources */,
+				ADB7F4E22882E41A00D7C2DA /* TextEditorSheetCell.swift in Sources */,
 				4FD48F7E28605E0600868A3B /* Strings.swift in Sources */,
 				4FD48F56286042DE00868A3B /* TextEditor.docc in Sources */,
+				ADB7F4DE2882CB4F00D7C2DA /* TextEditorSheetViewController.swift in Sources */,
 				4F19F825286AE580005FCCB5 /* NotificationName+.swift in Sources */,
 				4FA04DB728619EF100BF09AC /* PlaceholderTextView.swift in Sources */,
 				4FA04DBF2861B67900BF09AC /* TextEditorItemView.swift in Sources */,

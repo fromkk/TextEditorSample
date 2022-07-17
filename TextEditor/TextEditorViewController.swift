@@ -382,4 +382,20 @@ extension TextEditorViewController: KeyboardItemDelegate {
             .compactMap { ($0 as? TextEditorItemView)?.contentView as? UITextView }
             .first(where: { $0.isFirstResponder })
     }
+
+    public var textEditorViewController: TextEditorViewController? { self }
+}
+
+extension TextEditorViewController: TextEditorSheetImageItemDelegate {
+    func sheetImageItem(_: TextEditorSheetImageItem, addImage image: UIImage) {
+        let itemView = TextEditorItemView()
+        let item = TextEditorImageItem()
+        item.image = image
+        itemView.item = item
+        stackView.addArrangedSubview(itemView)
+    }
+
+    func sheetImageItem(_: TextEditorSheetImageItem, didFailedWith error: Error) {
+        print("\(#function) error \(error.localizedDescription)")
+    }
 }

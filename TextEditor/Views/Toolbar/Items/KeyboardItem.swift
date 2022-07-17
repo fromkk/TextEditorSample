@@ -10,6 +10,7 @@ import UIKit
 
 public protocol KeyboardItemDelegate: AnyObject {
     var currentTextView: UITextView? { get }
+    var textEditorViewController: TextEditorViewController? { get }
 }
 
 open class KeyboardItem: UIButton {

@@ -24,6 +24,8 @@ public enum L10n {
     public static let edit = L10n.tr("Localizable", "edit")
     /// フォーマット
     public static let format = L10n.tr("Localizable", "format")
+    /// 画像
+    public static let image = L10n.tr("Localizable", "image")
     /// 画像を選択
     public static let pickImage = L10n.tr("Localizable", "pick_image")
     /// タイトル

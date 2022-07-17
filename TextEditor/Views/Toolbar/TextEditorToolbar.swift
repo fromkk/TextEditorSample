@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class TextEditorToolbar: UIView {
+public final class TextEditorToolbar: UIView, PlusToolbarItemDelegate {
     public weak var keyboardItemDelegate: KeyboardItemDelegate?
 
     override public init(frame: CGRect) {
@@ -27,12 +27,30 @@ public final class TextEditorToolbar: UIView {
 
     private lazy var setUp: () -> Void = {
         backgroundColor = TextEditorConstant.Color.background
+        addPlusItem()
         addCloseKeyboardButton()
         addScrollView()
         addStackView()
         addTopSeparatorView()
         return {}
     }()
+
+    lazy var plusItem: PlusToolbarItem = {
+        let plusItem = PlusToolbarItem()
+        plusItem.delegate = self
+        return plusItem
+    }()
+
+    private func addPlusItem() {
+        plusItem.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(plusItem)
+        NSLayoutConstraint.activate([
+            plusItem.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            plusItem.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            bottomAnchor.constraint(equalTo: plusItem.bottomAnchor, constant: 0),
+            plusItem.widthAnchor.constraint(equalTo: plusItem.heightAnchor)
+        ])
+    }
 
     lazy var closeKeyboardButton: CloseKeyboardItem = {
         let button = CloseKeyboardItem(type: .custom)
@@ -60,7 +78,7 @@ public final class TextEditorToolbar: UIView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(scrollView)
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            scrollView.leadingAnchor.constraint(equalTo: plusItem.trailingAnchor, constant: 8),
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             closeKeyboardButton.leadingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 8)
@@ -145,5 +163,11 @@ public final class TextEditorToolbar: UIView {
 
     override public func target(forAction action: Selector, withSender sender: Any?) -> Any? {
         items.compactMap { $0.target(forAction: action, withSender: sender) }.first
+    }
+
+    // MARK: - PlusToolbarItemDelegate
+
+    public var textEditorViewController: TextEditorViewController? {
+        keyboardItemDelegate?.textEditorViewController
     }
 }
