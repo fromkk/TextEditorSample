@@ -8,7 +8,15 @@
 import Combine
 import UIKit
 
+public protocol TextEditorItemViewDelegate: AnyObject {
+    func itemView(_ itemView: TextEditorItemView, didStartDraggingAt point: CGPoint)
+    func itemView(_ itemView: TextEditorItemView, didChangeDraggingAt point: CGPoint)
+    func itemView(_ itemView: TextEditorItemView, didEndDraggingAt point: CGPoint)
+}
+
 @MainActor public final class TextEditorItemView: UIView {
+    public weak var delegate: TextEditorItemViewDelegate?
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -25,10 +33,36 @@ import UIKit
     }
 
     private lazy var setUp: () -> Void = {
+        isUserInteractionEnabled = true
         backgroundColor = TextEditorConstant.Color.background
         replaceContentView()
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(gesture:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(gesture:)))
+        tapGestureRecognizer.shouldRequireFailure(of: longPressGestureRecognizer)
+        addGestureRecognizer(tapGestureRecognizer)
+        addGestureRecognizer(longPressGestureRecognizer)
         return {}
     }()
+
+    @objc private func tap(gesture _: UITapGestureRecognizer) {
+        if let textView = contentView as? TextEditorTextView {
+            textView.becomeFirstResponder()
+        }
+    }
+
+    @objc private func longPress(gesture: UILongPressGestureRecognizer) {
+        let currentPosition = gesture.location(in: gesture.view)
+        switch gesture.state {
+        case .began:
+            delegate?.itemView(self, didStartDraggingAt: currentPosition)
+        case .changed:
+            delegate?.itemView(self, didChangeDraggingAt: currentPosition)
+        case .ended:
+            delegate?.itemView(self, didEndDraggingAt: currentPosition)
+        default:
+            break
+        }
+    }
 
     public var item: TextEditorItemRepresentable? {
         didSet {

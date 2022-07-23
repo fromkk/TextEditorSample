@@ -54,6 +54,10 @@
 		4FD48F802860728000868A3B /* TextEditorCoverViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD48F7F2860728000868A3B /* TextEditorCoverViewTest.swift */; };
 		4FD48F84286075E400868A3B /* Mocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD48F83286075E400868A3B /* Mocks.generated.swift */; };
 		4FD847582862DE5C00B6FE9C /* DoubleNewLineConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD847572862DE5C00B6FE9C /* DoubleNewLineConverter.swift */; };
+		AD02297B288B993500445D6F /* TextEditorViewController+ItemViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02297A288B993500445D6F /* TextEditorViewController+ItemViewDelegate.swift */; };
+		AD02297D288B9C3300445D6F /* UIView+snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02297C288B9C3300445D6F /* UIView+snapshot.swift */; };
+		AD662B3A28840FF700BD7518 /* TextEditorDragPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD662B3928840FF700BD7518 /* TextEditorDragPreviewView.swift */; };
+		AD662B3C2884101D00BD7518 /* TextEditorViewController+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD662B3B2884101D00BD7518 /* TextEditorViewController+Drop.swift */; };
 		ADA331FD28791FF40011C614 /* DoubleNewLineConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */; };
 		ADB7F4D72882A8A900D7C2DA /* TextEditorTextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4D62882A8A900D7C2DA /* TextEditorTextItem.swift */; };
 		ADB7F4D92882A92300D7C2DA /* TextEditorImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F4D82882A92300D7C2DA /* TextEditorImageItem.swift */; };
@@ -169,6 +173,10 @@
 		4FD48F7F2860728000868A3B /* TextEditorCoverViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorCoverViewTest.swift; sourceTree = "<group>"; };
 		4FD48F83286075E400868A3B /* Mocks.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mocks.generated.swift; sourceTree = "<group>"; };
 		4FD847572862DE5C00B6FE9C /* DoubleNewLineConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleNewLineConverter.swift; sourceTree = "<group>"; };
+		AD02297A288B993500445D6F /* TextEditorViewController+ItemViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditorViewController+ItemViewDelegate.swift"; sourceTree = "<group>"; };
+		AD02297C288B9C3300445D6F /* UIView+snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+snapshot.swift"; sourceTree = "<group>"; };
+		AD662B3928840FF700BD7518 /* TextEditorDragPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorDragPreviewView.swift; sourceTree = "<group>"; };
+		AD662B3B2884101D00BD7518 /* TextEditorViewController+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditorViewController+Drop.swift"; sourceTree = "<group>"; };
 		ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleNewLineConverterTest.swift; sourceTree = "<group>"; };
 		ADB7F4D62882A8A900D7C2DA /* TextEditorTextItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorTextItem.swift; sourceTree = "<group>"; };
 		ADB7F4D82882A92300D7C2DA /* TextEditorImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorImageItem.swift; sourceTree = "<group>"; };
@@ -268,6 +276,7 @@
 				4F19F81F286AD709005FCCB5 /* Notification+Keyboard.swift */,
 				4F19F824286AE580005FCCB5 /* NotificationName+.swift */,
 				4F855B2D2872876500474CE7 /* UIFont+.swift */,
+				AD02297C288B9C3300445D6F /* UIView+snapshot.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -287,14 +296,6 @@
 				ADB7F4D62882A8A900D7C2DA /* TextEditorTextItem.swift */,
 				ADB7F4D82882A92300D7C2DA /* TextEditorImageItem.swift */,
 				ADB7F5B82883DA0E00D7C2DA /* TextEditorItemImageView.swift */,
-			);
-			path = Item;
-			sourceTree = "<group>";
-		};
-		4FA04DC02861B8AE00BF09AC /* Item */ = {
-			isa = PBXGroup;
-			children = (
-				4FA04DC12861B8BA00BF09AC /* TextEditorTextView.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -371,7 +372,6 @@
 				4F855B322872DB2200474CE7 /* Helper */,
 				4F855B2F287290BA00474CE7 /* Menu */,
 				4FD847562862DDE200B6FE9C /* Converter */,
-				4FA04DBB2861B60C00BF09AC /* Item */,
 				4FA04DB82861A01E00BF09AC /* Constant */,
 				4FA04DB12861833900BF09AC /* Extensions */,
 				4FD48F752860582400868A3B /* Resources */,
@@ -380,6 +380,8 @@
 				4FD48F55286042DE00868A3B /* TextEditor.docc */,
 				4FD48F70286042EE00868A3B /* TextEditorViewController.swift */,
 				ADB7F5BA2883F61000D7C2DA /* TextEditorViewController+.swift */,
+				AD662B3B2884101D00BD7518 /* TextEditorViewController+Drop.swift */,
+				AD02297A288B993500445D6F /* TextEditorViewController+ItemViewDelegate.swift */,
 			);
 			path = TextEditor;
 			sourceTree = "<group>";
@@ -399,13 +401,15 @@
 		4FD48F722860561B00868A3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FA04DBB2861B60C00BF09AC /* Item */,
 				4F19F81B286AA27A005FCCB5 /* Toolbar */,
-				4FA04DC02861B8AE00BF09AC /* Item */,
 				4FD48F732860564C00868A3B /* TextEditorCoverView.swift */,
 				4FA04DB42861999800BF09AC /* TextEditorTitleView.swift */,
 				4FA04DB628619EF100BF09AC /* PlaceholderTextView.swift */,
+				4FA04DC12861B8BA00BF09AC /* TextEditorTextView.swift */,
 				4FA04DBE2861B67900BF09AC /* TextEditorItemView.swift */,
 				4F19F819286A9873005FCCB5 /* TextEditorStackView.swift */,
+				AD662B3928840FF700BD7518 /* TextEditorDragPreviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -782,7 +786,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F10ED842862F9BA0093A413 /* RemoveTextConverter.swift in Sources */,
+				AD02297B288B993500445D6F /* TextEditorViewController+ItemViewDelegate.swift in Sources */,
 				4FD48F742860564C00868A3B /* TextEditorCoverView.swift in Sources */,
+				AD662B3C2884101D00BD7518 /* TextEditorViewController+Drop.swift in Sources */,
 				4FA04DBA2861A02C00BF09AC /* TextEditorConstant.swift in Sources */,
 				ADB7F4D72882A8A900D7C2DA /* TextEditorTextItem.swift in Sources */,
 				4FC213EB28645E4000792DD8 /* Collection+.swift in Sources */,
@@ -796,6 +802,7 @@
 				4FD847582862DE5C00B6FE9C /* DoubleNewLineConverter.swift in Sources */,
 				ADB7F5BB2883F61000D7C2DA /* TextEditorViewController+.swift in Sources */,
 				4F19F827286AE72F005FCCB5 /* BoldKeyboardItem.swift in Sources */,
+				AD02297D288B9C3300445D6F /* UIView+snapshot.swift in Sources */,
 				4F855B312872913000474CE7 /* TextEditorMenuBuilder.swift in Sources */,
 				4FA04DC22861B8BA00BF09AC /* TextEditorTextView.swift in Sources */,
 				4FA04DB32861834900BF09AC /* NSLayoutConstraint+.swift in Sources */,
@@ -806,6 +813,7 @@
 				4FA04DBD2861B62000BF09AC /* TextEditorItemRepresentable.swift in Sources */,
 				4F277FED286C3B0100B625AF /* KeyboardItem.swift in Sources */,
 				4F855B2E2872876500474CE7 /* UIFont+.swift in Sources */,
+				AD662B3A28840FF700BD7518 /* TextEditorDragPreviewView.swift in Sources */,
 				ADB7F4DB2882C84700D7C2DA /* PlusToolbarItem.swift in Sources */,
 				4F19F820286AD709005FCCB5 /* Notification+Keyboard.swift in Sources */,
 				4F10ED86286306630093A413 /* UITextView+.swift in Sources */,
@@ -1016,6 +1024,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextEditorSampler/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1044,6 +1053,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TextEditorSampler/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -5,8 +5,11 @@
 
 
 import Combine
+import Photos
+import PhotosUI
 import SwiftUI
 import UIKit
+import UniformTypeIdentifiers
 @testable import TextEditor
 
 
@@ -22,6 +25,18 @@ public class TextEditorTextViewDelegateMock: TextEditorTextViewDelegate {
         textViewAddArgValues.append(textView)
         if let textViewAddHandler = textViewAddHandler {
             textViewAddHandler(textView)
+        }
+        
+    }
+
+    public private(set) var textViewJoinIfNeededCallCount = 0
+    public var textViewJoinIfNeededArgValues = [TextEditorTextView]()
+    public var textViewJoinIfNeededHandler: ((TextEditorTextView) -> ())?
+    public func textViewJoinIfNeeded(_ textView: TextEditorTextView)  {
+        textViewJoinIfNeededCallCount += 1
+        textViewJoinIfNeededArgValues.append(textView)
+        if let textViewJoinIfNeededHandler = textViewJoinIfNeededHandler {
+            textViewJoinIfNeededHandler(textView)
         }
         
     }

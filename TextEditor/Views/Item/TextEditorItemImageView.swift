@@ -25,6 +25,7 @@ open class TextEditorItemImageView: UIImageView {
     }
 
     private lazy var setUp: () -> Void = {
+        isUserInteractionEnabled = false
         backgroundColor = TextEditorConstant.Color.background
         return {}
     }()

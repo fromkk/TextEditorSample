@@ -154,11 +154,13 @@ extension TextEditorViewController: KeyboardItemDelegate {
 
 extension TextEditorViewController: TextEditorSheetImageItemDelegate {
     func sheetImageItem(_: TextEditorSheetImageItem, addImage image: UIImage) {
-        let itemView = TextEditorItemView()
-        let item = TextEditorImageItem()
-        item.image = image
-        itemView.item = item
-        stackView.addArrangedSubview(itemView)
+        let itemView = makeImageItem(image)
+        if let currentItemView = currentItemView, let index = stackView.arrangedSubviews.firstIndex(of: currentItemView) {
+            stackView.insertArrangedSubview(itemView, at: index + 1)
+        } else {
+            stackView.addArrangedSubview(itemView)
+            addTextItemViewIfNeeded()
+        }
     }
 
     func sheetImageItem(_: TextEditorSheetImageItem, didFailedWith error: Error) {

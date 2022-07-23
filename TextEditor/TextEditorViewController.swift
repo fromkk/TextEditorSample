@@ -33,6 +33,7 @@ open class TextEditorViewController: UIViewController {
         let defaultInputView = makeDefaultItemView()
         stackView.addArrangedSubview(defaultInputView)
         subscribe()
+        configureDrop()
     }
 
     private func invalidateIntrinsicContentSizeSubViews() {
@@ -120,13 +121,55 @@ open class TextEditorViewController: UIViewController {
         stackView.addArrangedSubview(titleView)
     }
 
+    /// 本文を入力
+    /// - Returns: TextEditorItemView
     func makeDefaultItemView() -> TextEditorItemView {
         let itemView = TextEditorItemView()
+        itemView.delegate = self
         let item = TextEditorTextItem(delegate: self)
         itemView.item = item
         return itemView
     }
 
+    /// 画像を入力
+    /// - Parameter image: 表示する画像
+    /// - Returns: TextEditorItemView
+    func makeImageItem(_ image: UIImage) -> TextEditorItemView {
+        let itemView = TextEditorItemView()
+        itemView.delegate = self
+        let item = TextEditorImageItem()
+        item.image = image
+        itemView.item = item
+        return itemView
+    }
+
+    /// 現在選択されているview
+    var currentItemView: TextEditorItemView? {
+        stackView.arrangedSubviews.first { itemView in
+            guard
+                let itemView = itemView as? TextEditorItemView,
+                let textView = itemView.contentView as? TextEditorTextView,
+                textView.isFirstResponder
+            else {
+                return false
+            }
+            return true
+        } as? TextEditorItemView
+    }
+
+    /// 本文入力欄を最後に追加する（最後がテキスト入力ではない場合）
+    func addTextItemViewIfNeeded() {
+        if
+            let lastView = stackView.arrangedSubviews.last as? TextEditorItemView,
+            lastView.contentView is TextEditorTextView
+        {
+            return
+        }
+        let itemView = makeDefaultItemView()
+        stackView.addArrangedSubview(itemView)
+    }
+
+    /// placeholderのテキスト
     let textViewPlaceholder: String? = [
         L10n.TextEditor.Body.placeholder0,
         L10n.TextEditor.Body.placeholder1
@@ -174,6 +217,8 @@ open class TextEditorViewController: UIViewController {
         toolbar.items = editorToolbarItems
     }
 
+    var dragPreviewImageView: UIImageView?
+
     override open var keyCommands: [UIKeyCommand]? {
         if #available(iOS 15.0, *) {
             return super.keyCommands
@@ -215,7 +260,7 @@ open class TextEditorViewController: UIViewController {
 
     // MARK: - Combine
 
-    private var cancellables: Set<AnyCancellable> = .init()
+    var cancellables: Set<AnyCancellable> = .init()
 
     private func subscribe() {
         handleCoverViewHeightConstraint()

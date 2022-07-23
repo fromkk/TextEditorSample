@@ -1,6 +1,7 @@
 disabled_rules:
 - type_name
 - orphaned_doc_comment
+- identifier_name
 
 line_length:
 - 200
