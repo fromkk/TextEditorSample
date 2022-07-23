@@ -74,6 +74,7 @@ public final class TextEditorTitleView: UIView, UITextViewDelegate {
     }
 
     public func textViewDidChange(_ textView: UITextView) {
+        guard textView.text.unicodeScalars.contains(where: { CharacterSet.newlines.contains($0) }) else { return }
         let range = NSRange(location: 0, length: (textView.text as NSString).length)
         textView.text = (textView.text as NSString).replacingOccurrences(of: "\n|\r|\t", with: "", options: .regularExpression, range: range)
     }

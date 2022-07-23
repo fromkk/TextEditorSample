@@ -24,9 +24,9 @@ public final class TextEditorSheetViewController: UIViewController, UICollection
     }
 
     public lazy var collectionViewLayout: UICollectionViewLayout = {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 4), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 4), heightDimension: .estimated(68))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(68))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
         group.interItemSpacing = .fixed(8)
         group.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
