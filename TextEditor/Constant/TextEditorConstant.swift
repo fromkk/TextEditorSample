@@ -26,4 +26,5 @@ public enum TextEditorConstant {
     }
 
     public static var minimumItemHeight: CGFloat = 32
+    public static var toolbarHeight: CGFloat = 50
 }

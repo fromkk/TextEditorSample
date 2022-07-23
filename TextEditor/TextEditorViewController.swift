@@ -191,7 +191,7 @@ open class TextEditorViewController: UIViewController {
         NSLayoutConstraint.activate([
             toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: toolbar.trailingAnchor),
-            toolbar.heightAnchor.constraint(equalToConstant: 50),
+            toolbar.heightAnchor.constraint(equalToConstant: TextEditorConstant.toolbarHeight),
             toolbar.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
             toolbarBottomConstraint
         ])
@@ -242,19 +242,15 @@ open class TextEditorViewController: UIViewController {
     }
 
     func scrollTo(_ view: UIView) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self, weak view] in
-            guard let self = self, let view = view else { return }
-            if let textView = view as? UITextView {
-                guard let position = textView.selectedTextRange?.end else {
-                    return
-                }
-                let bounds = textView.caretRect(for: position)
-                let rect = textView.convert(bounds, to: self.scrollView)
-                self.scrollView.scrollRectToVisible(rect, animated: true)
-            } else {
-                let rect = view.convert(view.bounds, to: self.scrollView)
-                self.scrollView.scrollRectToVisible(rect, animated: true)
-            }
+        if let textView = view as? UITextView, let position = textView.selectedTextRange?.end {
+            let bounds = textView.caretRect(for: position)
+            let rect = textView.convert(bounds, to: scrollView)
+            guard !scrollView.visibleFrame.contains(rect) else { return }
+            scrollView.setContentOffset(CGPoint(x: 0, y: rect.maxY + TextEditorConstant.toolbarHeight - scrollView.bounds.size.height), animated: true)
+        } else {
+            let rect = view.convert(view.bounds, to: scrollView)
+            guard !scrollView.visibleFrame.contains(rect) else { return }
+            scrollView.setContentOffset(CGPoint(x: 0, y: rect.maxY + TextEditorConstant.toolbarHeight - scrollView.bounds.size.height), animated: true)
         }
     }
 
@@ -307,6 +303,7 @@ open class TextEditorViewController: UIViewController {
         NotificationCenter.default.publisher(for: UITextView.textDidBeginEditingNotification)
             .compactMap { $0.object as? UITextView }
             .filter { [weak self] in self?.view.window?.windowScene?.isEqual($0.window?.windowScene) ?? false }
+            .debounce(for: 0.4, scheduler: RunLoop.main)
             .sink { [weak self] textView in
                 self?.scrollTo(textView)
             }
