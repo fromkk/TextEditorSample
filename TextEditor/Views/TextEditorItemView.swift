@@ -38,7 +38,7 @@ public protocol TextEditorItemViewDelegate: AnyObject {
         replaceContentView()
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(gesture:)))
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(gesture:)))
-        tapGestureRecognizer.shouldRequireFailure(of: longPressGestureRecognizer)
+        _ = tapGestureRecognizer.shouldRequireFailure(of: longPressGestureRecognizer)
         addGestureRecognizer(tapGestureRecognizer)
         addGestureRecognizer(longPressGestureRecognizer)
         return {}
@@ -46,7 +46,7 @@ public protocol TextEditorItemViewDelegate: AnyObject {
 
     @objc private func tap(gesture _: UITapGestureRecognizer) {
         if let textView = contentView as? TextEditorTextView {
-            textView.becomeFirstResponder()
+            _ = textView.becomeFirstResponder()
         }
     }
 

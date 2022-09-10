@@ -69,6 +69,7 @@
 		ADB7F5B72882E92300D7C2DA /* TextEditorSheetImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F5B62882E92300D7C2DA /* TextEditorSheetImageItem.swift */; };
 		ADB7F5B92883DA0E00D7C2DA /* TextEditorItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F5B82883DA0E00D7C2DA /* TextEditorItemImageView.swift */; };
 		ADB7F5BB2883F61000D7C2DA /* TextEditorViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F5BA2883F61000D7C2DA /* TextEditorViewController+.swift */; };
+		ADCDD8AF28CC306200FD7E98 /* RemoveTextConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCDD8AE28CC306200FD7E98 /* RemoveTextConverterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,7 @@
 		ADB7F5B62882E92300D7C2DA /* TextEditorSheetImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorSheetImageItem.swift; sourceTree = "<group>"; };
 		ADB7F5B82883DA0E00D7C2DA /* TextEditorItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorItemImageView.swift; sourceTree = "<group>"; };
 		ADB7F5BA2883F61000D7C2DA /* TextEditorViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditorViewController+.swift"; sourceTree = "<group>"; };
+		ADCDD8AE28CC306200FD7E98 /* RemoveTextConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveTextConverterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				ADA331FC28791FF40011C614 /* DoubleNewLineConverterTest.swift */,
+				ADCDD8AE28CC306200FD7E98 /* RemoveTextConverterTest.swift */,
 			);
 			path = Converter;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				4FC213F4286461E700792DD8 /* Pattern.swift in Sources */,
 				4FC213F2286461C200792DD8 /* NSLayoutConstraintTest.swift in Sources */,
 				4FC213EE28645EB700792DD8 /* CollectionTest.swift in Sources */,
+				ADCDD8AF28CC306200FD7E98 /* RemoveTextConverterTest.swift in Sources */,
 				4FC213F02864606A00792DD8 /* UITextViewTest.swift in Sources */,
 				ADA331FD28791FF40011C614 /* DoubleNewLineConverterTest.swift in Sources */,
 				4FD48F802860728000868A3B /* TextEditorCoverViewTest.swift in Sources */,
